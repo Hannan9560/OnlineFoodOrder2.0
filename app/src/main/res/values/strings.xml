@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Online Food Order</string>
+    <string-array name="area_name">
+        <item>Mirpur</item>
+        <item>Dhanmondhi</item>
+        <item>Mokakhali</item>
+        <item>Mohammadpur</item>
+        <item>Kuril</item>
+        <item>Gulshan</item>
+        <item>Baridara</item>
+        <item>Bosundhara</item>
+    </string-array>
+</resources>
