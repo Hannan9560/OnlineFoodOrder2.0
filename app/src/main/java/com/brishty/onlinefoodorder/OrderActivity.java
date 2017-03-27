@@ -1,5 +1,6 @@
 package com.brishty.onlinefoodorder;
 
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 
 public class OrderActivity extends AppCompatActivity {
+
     private  TextView mFood;
     private  TextView mPayment;
     private TextView mLocation;
@@ -27,10 +29,15 @@ public class OrderActivity extends AppCompatActivity {
         mTime = (TextView) findViewById(R.id.timeTV);
 
 
+
+
         String foodList = getIntent().getStringExtra("food");
         String payment = getIntent().getStringExtra("payment");
         String location_area = getIntent().getStringExtra("location");
-        String Address = getIntent().getStringExtra("address");
+        String house = getIntent().getStringExtra("house");
+        String road = getIntent().getStringExtra("road");
+        String thana = getIntent().getStringExtra("thana");
+        int zip = getIntent().getIntExtra("zipCode",0);
         int Year = getIntent().getIntExtra("year",0);
         int Month = getIntent().getIntExtra("month",0);
         int Day = getIntent().getIntExtra("day",0);
@@ -40,7 +47,7 @@ public class OrderActivity extends AppCompatActivity {
         mFood.setText(foodList);
         mPayment.setText(payment);
         mLocation.setText(location_area);
-        mAddress.setText(Address);
+        mAddress.setText("House: "+house+"; \n"+"Road: "+road+"; \n"+"Thana: "+thana+"; \n"+"Zip Code: "+zip);
         mDate.setText(String.valueOf(Year+"/"+Month+"/"+Day));
         mTime.setText(String.valueOf(Hour+":"+Minute));
 

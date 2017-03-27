@@ -1,10 +1,13 @@
 package com.brishty.onlinefoodorder;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,13 +25,16 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+
+    private AlertDialog.Builder customAddressDialog;
+    private String HouseNumber, RoadNumber, PoliceStation, ZipCode;
+
     ArrayList<String> selection = new ArrayList<String>();
     private  String payment;
     private String location;
     private Spinner mSpinner;
     private int Year, Month, Day, Hour, Minute;
     private int y, m, d, h, mi;
-    private EditText mAddress;
     private Button mSubmit;
 
 
@@ -38,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mSpinner = (Spinner) findViewById(R.id.myArea);
-        mAddress = (EditText) findViewById(R.id.addressET);
         mSubmit = (Button) findViewById(R.id.submit);
 
+        customAddressDialog = new AlertDialog.Builder(this);
 
         ArrayAdapter<CharSequence>adapter = ArrayAdapter.createFromResource(this,R.array.area_name
         ,android.R.layout.simple_spinner_item);
@@ -195,16 +201,56 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+    public void setAddress(View view) {
+        //Custom Layout Dialog Box;
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.address_layout,null);
+        final EditText houseNumber = (EditText) v.findViewById(R.id.houseName);
+        final EditText roadNumber = (EditText) v.findViewById(R.id.roadNumber);
+        final EditText policeStation = (EditText) v.findViewById(R.id.policeSta);
+        final EditText zipCode = (EditText) v.findViewById(R.id.zipCode);
+
+        customAddressDialog.setTitle("Delivery Address");
+        customAddressDialog.setIcon(R.drawable.delivery);
+        customAddressDialog.setView(v);
+        customAddressDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                HouseNumber = houseNumber.getText().toString();
+                RoadNumber = roadNumber.getText().toString();
+                PoliceStation = policeStation.getText().toString();
+                ZipCode = zipCode.getText().toString();
+            }
+        });
+        customAddressDialog.setNegativeButton("Cancel", null);
+        customAddressDialog.show();
+
+        //Dialog Box
+        /*final EditText mAddress = new EditText(this);
+        customAddressDialog.setTitle("Food Ordering");
+        customAddressDialog.setIcon(R.mipmap.ic_launcher);
+        customAddressDialog.setView(mAddress);
+
+        customAddressDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addreess = mAddress.getText().toString();
+
+
+            }
+        });
+        customAddressDialog.setNegativeButton("Cancel", null);
+        customAddressDialog.show();*/
+    }
+
     public void Confirm(View view) {
         String selectedFood = "";
-        String address;
         Intent intent = new Intent(MainActivity.this, OrderActivity.class);
             for(String SelectionFood : selection)
             {
                 selectedFood = selectedFood + SelectionFood + "\n";
             }
-        address = mAddress.getText().toString();
-
         intent.putExtra("food",selectedFood);
         intent.putExtra("payment",payment);
         intent.putExtra("location",location);
@@ -213,8 +259,13 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("day", d);
         intent.putExtra("hour", h);
         intent.putExtra("minute", mi);
-        intent.putExtra("address",address);
+        intent.putExtra("house",HouseNumber);
+        intent.putExtra("road",RoadNumber);
+        intent.putExtra("thana",PoliceStation);
+        intent.putExtra("zipCode",ZipCode);
 
         startActivity(intent);
     }
+
+
 }
