@@ -20,21 +20,27 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    DateFormat formatedateTime = DateFormat.getTimeInstance();
+    Calendar dateTime = Calendar.getInstance();
+
     private AlertDialog.Builder customAddressDialog;
-    private String HouseNumber, RoadNumber, PoliceStation, ZipCode;
+    private String HouseNumber, RoadNumber, PoliceStation;
+    private int  ZipCode;
 
     ArrayList<String> selection = new ArrayList<String>();
     private  String payment;
     private String location;
     private Spinner mSpinner;
-    private int Year, Month, Day, Hour, Minute;
-    private int y, m, d, h, mi;
+    private int Year, Month, Day;
+    String time;
+    private int y, m, d;
     private Button mSubmit;
 
 
@@ -172,32 +178,22 @@ public class MainActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            y = year;
-            m = month;
-            d = day;
-            /*Toast.makeText(MainActivity.this, "Year: "+year, Toast.LENGTH_SHORT).show();
-            Toast.makeText(MainActivity.this, "Month: "+(month+1), Toast.LENGTH_SHORT).show();
-            Toast.makeText(MainActivity.this, "Day: "+day, Toast.LENGTH_SHORT).show();*/
+            //Print Year/Month/Day
         }
     };
 
-    public void settime(View view) {
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        Hour = calendar.get(Calendar.HOUR);
-        Minute = calendar.get(Calendar.MINUTE);
+    public void onTimeSet(View view) {
 
-
-        TimePickerDialog tpd = new TimePickerDialog(this, timeListener, Hour, Minute, true);
+        TimePickerDialog tpd = new TimePickerDialog(this,timeListener, dateTime.get(Calendar.HOUR), dateTime.get(Calendar.MINUTE),true);
         tpd.show();
     }
-    private TimePickerDialog.OnTimeSetListener timeListener = new TimePickerDialog.OnTimeSetListener() {
+    TimePickerDialog.OnTimeSetListener timeListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
-        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-            h = hour;
-            mi = minute;
-
-           /* Toast.makeText(MainActivity.this, "Hour: "+ hour, Toast.LENGTH_SHORT).show();
-            Toast.makeText(MainActivity.this, "Minute: "+ minute, Toast.LENGTH_SHORT).show();*/
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateTime.set(Calendar.HOUR,hourOfDay);
+            dateTime.set(Calendar.MINUTE,minute);
+            //Print Time Hour-minute-AM, PM
+            time = (formatedateTime.format(dateTime.getTime()));
         }
     };
 
@@ -209,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText houseNumber = (EditText) v.findViewById(R.id.houseName);
         final EditText roadNumber = (EditText) v.findViewById(R.id.roadNumber);
         final EditText policeStation = (EditText) v.findViewById(R.id.policeSta);
-        final EditText zipCode = (EditText) v.findViewById(R.id.zipCode);
+        final EditText zipCode = (EditText) v.findViewById(R.id.pstCode);
 
         customAddressDialog.setTitle("Delivery Address");
         customAddressDialog.setIcon(R.drawable.delivery);
@@ -220,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 HouseNumber = houseNumber.getText().toString();
                 RoadNumber = roadNumber.getText().toString();
                 PoliceStation = policeStation.getText().toString();
-                ZipCode = zipCode.getText().toString();
+                ZipCode = Integer.parseInt(zipCode.getText().toString());
             }
         });
         customAddressDialog.setNegativeButton("Cancel", null);
@@ -254,11 +250,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("food",selectedFood);
         intent.putExtra("payment",payment);
         intent.putExtra("location",location);
-        intent.putExtra("year", y);
-        intent.putExtra("month", m);
-        intent.putExtra("day", d);
-        intent.putExtra("hour", h);
-        intent.putExtra("minute", mi);
+        intent.putExtra("year", Year);
+        intent.putExtra("month", Month);
+        intent.putExtra("day", Day);
+        intent.putExtra("time",time);
         intent.putExtra("house",HouseNumber);
         intent.putExtra("road",RoadNumber);
         intent.putExtra("thana",PoliceStation);

@@ -98,7 +98,7 @@
                 android:textColor="#7c6c6c"
                 android:layout_weight="1"/>
             <EditText
-                android:id="@+id/zipCode"
+                android:id="@+id/pstCode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"

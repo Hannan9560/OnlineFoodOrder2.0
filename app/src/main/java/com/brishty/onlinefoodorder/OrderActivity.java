@@ -37,19 +37,20 @@ public class OrderActivity extends AppCompatActivity {
         String house = getIntent().getStringExtra("house");
         String road = getIntent().getStringExtra("road");
         String thana = getIntent().getStringExtra("thana");
-        int zip = getIntent().getIntExtra("zipCode",0);
+        int postCode = getIntent().getIntExtra("zipCode",0);
         int Year = getIntent().getIntExtra("year",0);
         int Month = getIntent().getIntExtra("month",0);
         int Day = getIntent().getIntExtra("day",0);
-        int Hour = getIntent().getIntExtra("hour",0);
-        int Minute = getIntent().getIntExtra("minute",0);
+        String time = getIntent().getStringExtra("time");
+
 
         mFood.setText(foodList);
         mPayment.setText(payment);
         mLocation.setText(location_area);
-        mAddress.setText("House: "+house+"; \n"+"Road: "+road+"; \n"+"Thana: "+thana+"; \n"+"Zip Code: "+zip);
+        mAddress.setText("House: "+house+"; \n"+"Road: "+road+"; \n"+"Thana: "+thana+"; \n"+"Zip Code: "+postCode);
         mDate.setText(String.valueOf(Year+"/"+Month+"/"+Day));
-        mTime.setText(String.valueOf(Hour+":"+Minute));
+
+        mTime.setText(time);
 
 
 
