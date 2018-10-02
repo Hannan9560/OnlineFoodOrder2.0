@@ -26,10 +26,9 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="3">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,20 +45,20 @@
                     android:textColor="#000"/>
 
             </LinearLayout>
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1">
-               <!-- <TextView
+               &lt;!&ndash; <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
                     android:textAlignment="center"
                     android:textSize="20sp"
-                    android:textColor="#000"/>-->
-            </LinearLayout>
+                    android:textColor="#000"/>&ndash;&gt;
+            </LinearLayout>-->
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

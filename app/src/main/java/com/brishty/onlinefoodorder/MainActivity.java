@@ -194,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
             dateTime.set(Calendar.MINUTE,minute);
             //Print Time Hour-minute-AM, PM
             time = (formatedateTime.format(dateTime.getTime()));
+//            Toast for test
+            Toast.makeText(MainActivity.this, time, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -241,26 +243,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Confirm(View view) {
-        String selectedFood = "";
-        Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+        try {
+            String selectedFood = "";
+            Intent intent = new Intent(MainActivity.this, OrderActivity.class);
             for(String SelectionFood : selection)
             {
                 selectedFood = selectedFood + SelectionFood + "\n";
             }
-        intent.putExtra("food",selectedFood);
-        intent.putExtra("payment",payment);
-        intent.putExtra("location",location);
-        intent.putExtra("year", Year);
-        intent.putExtra("month", Month);
-        intent.putExtra("day", Day);
-        intent.putExtra("time",time);
-        intent.putExtra("house",HouseNumber);
-        intent.putExtra("road",RoadNumber);
-        intent.putExtra("thana",PoliceStation);
-        intent.putExtra("zipCode",ZipCode);
+            intent.putExtra("food",selectedFood);
+            intent.putExtra("payment",payment);
+            intent.putExtra("location",location);
+            intent.putExtra("year", Year);
+            intent.putExtra("month", Month);
+            intent.putExtra("day", Day);
+            intent.putExtra("time",time);
+            intent.putExtra("house",HouseNumber);
+            intent.putExtra("road",RoadNumber);
+            intent.putExtra("thana",PoliceStation);
+            intent.putExtra("zipCode",ZipCode);
 
-        startActivity(intent);
+            startActivity(intent);
+        }catch (Exception e)
+        {
+            Toast.makeText(this, "Empty Field", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
 }
+
+
+   /* *//*timeSet*//*
+    private void timeSet() {
+        TimePickerDialog tpd = new TimePickerDialog(this, timeListener, dateTime.get(Calendar.HOUR), dateTime.get(Calendar.MINUTE),true);
+        tpd.show();
+    }
+
+    TimePickerDialog.OnTimeSetListener timeListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateTime.set(Calendar.HOUR, hourOfDay);
+            dateTime.set(Calendar.MINUTE, minute);
+            *//*SCFromTime = (formatedateTime.format(dateTime.getTime()));
+            SCTotime = (formatedateTime.format(dateTime.getTime()));
+            PCFromTime = (formatedateTime.format(dateTime.getTime()));
+            PCToTime = (formatedateTime.format(dateTime.getTime()));*//*
+        }
+    };*/

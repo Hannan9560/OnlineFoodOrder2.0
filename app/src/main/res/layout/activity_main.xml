@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="Select Food Item"
         android:textSize="20sp"
-        android:textColor="#000"
+        android:background="#5b6c71"
         android:textAlignment="center"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,13 +114,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:text="SELECT PAYMENT METHODS"
             android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="#000"/>
+            android:background="#5b6c71"
+            android:textSize="20sp" />
     </LinearLayout>
 
         <RadioGroup
@@ -147,6 +149,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#5b6c71"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="match_parent"
@@ -159,11 +162,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#76a3a1"
         android:layout_marginTop="10dp">
+
         <Spinner
             android:id="@+id/myArea"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
